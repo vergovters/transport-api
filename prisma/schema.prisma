@@ -1,0 +1,87 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+enum VehicleType {
+    TRUCK
+    CAR
+    VAN
+    BUS
+    MOTORCYCLE
+}
+
+enum VehicleStatus {
+    FREE
+    BUSY
+    MAINTENANCE
+    OUT_OF_ORDER
+}
+
+enum RouteStatus {
+    PENDING
+    IN_PROGRESS
+    COMPLETED
+    CANCELLED
+}
+
+model Vehicle {
+    id             String        @id @default(uuid())
+    plateNumber    String        @unique
+    model          String
+    type           VehicleType
+    purchaseDate   DateTime
+    status         VehicleStatus
+    pricePerKmEur  Float
+    createdAt      DateTime      @default(now())
+    updatedAt      DateTime      @updatedAt
+    assignments    Assignment[]
+    currentRoute   Route?        @relation(fields: [currentRouteId], references: [id])
+    currentRouteId String?
+}
+
+model Route {
+    id                  String       @id @default(uuid())
+    startLat            Float
+    startLon            Float
+    endLat              Float
+    endLon              Float
+    distanceKm          Float
+    departureDate       DateTime
+    completionDate      DateTime?
+    requiredVehicleType VehicleType
+    expectedRevenueUsd  Float?
+    vehicleId           String?
+    status              RouteStatus
+    costEur             Float?
+    costUsd             Float?
+    costUah             Float?
+    createdAt           DateTime     @default(now())
+    updatedAt           DateTime     @updatedAt
+    assignments         Assignment[]
+    Vehicle             Vehicle[]
+}
+
+model Assignment {
+    id         String   @id @default(uuid())
+    vehicle    Vehicle  @relation(fields: [vehicleId], references: [id])
+    vehicleId  String
+    route      Route    @relation(fields: [routeId], references: [id])
+    routeId    String
+    assignedAt DateTime @default(now())
+    costEur    Float
+    costUsd    Float
+    costUah    Float
+}
+
+model ApiKey {
+    id        String   @id @default(uuid())
+    name      String
+    key       String   @unique
+    active    Boolean  @default(true)
+    createdAt DateTime @default(now())
+}
