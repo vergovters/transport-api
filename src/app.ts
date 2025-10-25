@@ -22,7 +22,6 @@ app.use('/api/vehicles', apiKeyAuth, vehicleRouter);
 app.use('/api/routes', apiKeyAuth, routeRouter);
 
 
-app.get('/', (_, res) => {
-    console.log('Root route hit!');
+app.get('/health', (_, res) => {
     res.send('Transport API is running 🚚');
 });

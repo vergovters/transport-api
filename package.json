@@ -20,6 +20,7 @@
     "helmet": "^6.0.1",
     "jest-mock-extended": "^4.0.0",
     "prisma": "^5.8.0",
+    "serverless-http": "^4.0.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
     "xstate": "^5.23.0",
