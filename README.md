@@ -76,6 +76,15 @@ API використовує API Key аутентифікацію. Додайт�
 X-API-Key: your-api-key
 ```
 
+## 📮 Postman колекція
+
+
+1. **Імпорт колекції**
+   - Відкрити Postman
+   - Натиснути **Import** (або `Ctrl+O`)
+   - Виберати файл `postman/Transport-API.postman_collection.json`
+
+
 ## 📊 Структура проекту
 
 ```
