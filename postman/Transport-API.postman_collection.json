@@ -1,0 +1,550 @@
+{
+	"info": {
+		"_postman_id": "transport-api-collection",
+		"name": "🚚 Transport API",
+		"description": "Comprehensive collection for Transport API with vehicle management, route planning, and workflow operations",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "🏥 Health Check",
+			"item": [
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/health",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"health"
+							]
+						},
+						"description": "Check if the API is running"
+					}
+				}
+			]
+		},
+		{
+			"name": "🚗 Vehicles",
+			"item": [
+				{
+					"name": "Get All Vehicles",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/vehicles",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"vehicles"
+							]
+						},
+						"description": "Retrieve all vehicles in the system"
+					}
+				},
+				{
+					"name": "Create Vehicle",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{api_key}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"plateNumber\": \"ABC-123\",\n  \"model\": \"Mercedes Actros\",\n  \"type\": \"TRUCK\",\n  \"purchaseDate\": \"2023-01-15T00:00:00.000Z\",\n  \"status\": \"FREE\",\n  \"pricePerKmEur\": 1.5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/vehicles",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"vehicles"
+							]
+						},
+						"description": "Create a new vehicle"
+					}
+				},
+				{
+					"name": "Update Vehicle",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{api_key}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"plateNumber\": \"ABC-123-UPDATED\",\n  \"model\": \"Ford Transit\",\n  \"type\": \"VAN\",\n  \"purchaseDate\": \"2023-03-20T00:00:00.000Z\",\n  \"status\": \"BUSY\",\n  \"pricePerKmEur\": 1.2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/vehicles/{{vehicle_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"vehicles",
+								"{{vehicle_id}}"
+							]
+						},
+						"description": "Update an existing vehicle by ID"
+					}
+				},
+				{
+					"name": "Delete Vehicle",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/vehicles/{{vehicle_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"vehicles",
+								"{{vehicle_id}}"
+							]
+						},
+						"description": "Delete a vehicle by ID"
+					}
+				}
+			]
+		},
+		{
+			"name": "🗺️ Routes",
+			"item": [
+				{
+					"name": "Get All Routes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/routes",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"routes"
+							]
+						},
+						"description": "Retrieve all routes in the system"
+					}
+				},
+				{
+					"name": "Create Route",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{api_key}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"startLat\": 50.4501,\n  \"startLon\": 30.5234,\n  \"endLat\": 49.2331,\n  \"endLon\": 28.4682,\n  \"departureDate\": \"2025-10-27T08:00:00.000Z\",\n  \"requiredVehicleType\": \"TRUCK\",\n  \"expectedRevenueUsd\": 500.0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/routes",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"routes"
+							]
+						},
+						"description": "Create a new route"
+					}
+				},
+				{
+					"name": "Update Route",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{api_key}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"startLat\": 50.4501,\n  \"startLon\": 30.5234,\n  \"endLat\": 49.2331,\n  \"endLon\": 28.4682,\n  \"departureDate\": \"2025-10-28T10:00:00.000Z\",\n  \"requiredVehicleType\": \"VAN\",\n  \"expectedRevenueUsd\": 350.0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/routes/{{route_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"routes",
+								"{{route_id}}"
+							]
+						},
+						"description": "Update an existing route by ID"
+					}
+				},
+				{
+					"name": "Delete Route",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/routes/{{route_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"routes",
+								"{{route_id}}"
+							]
+						},
+						"description": "Delete a route by ID"
+					}
+				}
+			]
+		},
+		{
+			"name": "🔄 Route Workflow",
+			"item": [
+				{
+					"name": "Assign Vehicle to Route",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{api_key}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"vehicleId\": \"{{vehicle_id}}\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/routes/{{route_id}}/assign-vehicle",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"routes",
+								"{{route_id}}",
+								"assign-vehicle"
+							]
+						},
+						"description": "Assign a vehicle to a route (PENDING → ASSIGNED)"
+					}
+				},
+				{
+					"name": "Start Route",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/routes/{{route_id}}/start",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"routes",
+								"{{route_id}}",
+								"start"
+							]
+						},
+						"description": "Start route execution (ASSIGNED → IN_PROGRESS)"
+					}
+				},
+				{
+					"name": "Complete Route",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/routes/{{route_id}}/complete",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"routes",
+								"{{route_id}}",
+								"complete"
+							]
+						},
+						"description": "Complete route execution (IN_PROGRESS → COMPLETED)"
+					}
+				},
+				{
+					"name": "Cancel Route",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/routes/{{route_id}}/cancel",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"routes",
+								"{{route_id}}",
+								"cancel"
+							]
+						},
+						"description": "Cancel route execution (Any state → CANCELLED)"
+					}
+				},
+				{
+					"name": "Retry Route",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/routes/{{route_id}}/retry",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"routes",
+								"{{route_id}}",
+								"retry"
+							]
+						},
+						"description": "Retry route execution (CANCELLED → PENDING)"
+					}
+				},
+				{
+					"name": "Get Valid Transitions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/routes/{{route_id}}/transitions",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"routes",
+								"{{route_id}}",
+								"transitions"
+							]
+						},
+						"description": "Get available state transitions for a route"
+					}
+				}
+			]
+		},
+		{
+			"name": "📖 Documentation",
+			"item": [
+				{
+					"name": "Swagger UI",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api-docs",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api-docs"
+							]
+						},
+						"description": "Access Swagger UI documentation"
+					}
+				},
+				{
+					"name": "OpenAPI JSON",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api-docs.json",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api-docs.json"
+							]
+						},
+						"description": "Get OpenAPI specification as JSON"
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "base_url_production",
+			"value": "https://your-domain.com",
+			"type": "string"
+		},
+		{
+			"key": "api_key",
+			"value": "your-api-key-here",
+			"type": "string"
+		},
+		{
+			"key": "vehicle_id",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "route_id",
+			"value": "1",
+			"type": "string"
+		}
+	]
+}
