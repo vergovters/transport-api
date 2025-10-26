@@ -10,9 +10,10 @@ Transport API надає можливості для:
 
 ## 🛠 Технології
 
+### Development
 - **Backend**: Node.js, Express.js, TypeScript
 - **База даних**: PostgreSQL з Prisma ORM
-- **Документація**: Swagger/OpenAPI 3.0
+- **Документація**: Swagger/OpenAPI 3.0  
 - **Контейнеризація**: Docker, Docker Compose
 
 ## 🚀 Швидкий запуск
@@ -35,6 +36,13 @@ docker-compose up --build
 - API: http://localhost:3000
 - Swagger UI: http://localhost:3000/api-docs
 
+### 🌐 Production розгортання
+
+#### Технології production середовища
+- **Server**: AWS EC2 Ubuntu
+- **Database**: Heroku PostgreSQL 
+- **Reverse Proxy**: Caddy
+- **Process Manager**: systemd
 
 ## 📚 API Документація
 
@@ -109,7 +117,66 @@ transport-api/
 
 ## 🧪 Тестування
 
-Запустіть тести:
+Запустити тести:
 ```bash
 npm test
 ```
+
+## 🎯 Потенційні покращення
+
+### 🏗️ Архітектурні покращення
+
+#### Декоплінг модулів
+Поточна архітектура може бути покращена через:
+
+```typescript
+// Замість прямих залежностей
+
+interface IVehicleService {
+  create(data: CreateVehicleDto): Promise<Vehicle>;
+  findAll(): Promise<Vehicle[]>;
+}
+
+@Injectable()
+class VehicleController {
+  constructor(private vehicleService: IVehicleService) {}
+}
+```
+
+#### Доменно-орієнтована архітектура (DDD)
+```
+src/
+├── domains/
+│   ├── vehicles/
+│   │   ├── entities/
+│   │   ├── repositories/
+│   │   ├── services/
+│   │   └── controllers/
+│   └── routes/
+│       ├── entities/
+│       ├── repositories/
+│       ├── services/
+│       └── controllers/
+├── shared/
+│   ├── infrastructure/
+│   ├── interfaces/
+│   └── utils/
+```
+
+### ☁️ AWS Infrastructure покращення
+
+#### 1. Virtual Private Cloud (VPC)
+```yaml
+#### 1. Краще створити власну VPC:
+
+#### 2. AWS Secrets Manager
+# Замість environment variables в plaintext
+
+#### 3. Route53 для DNS
+
+#### 4. Application Load Balancer
+# Замість Caddy можна використовувати ALB
+
+#### 5. RDS для бази даних
+
+
